@@ -16,6 +16,7 @@ public class View extends JFrame implements ActionListener{
 	private JButton btnHideShow; //Ukryj/Pokaż paletę kolorów
 	private JButton btnDecreaseFontSize; //Zmniejsz czcionkę
 	private JButton btnIncreaseFontSize; //Zwiększ czcionkę
+	private JButton btnChangePalet; //Zmień tło
 	private JRadioButton rdbtnChangeBackground; //Zmień tło
 	private JRadioButton rdbtnChangeTextColor; //Zmień kolor tekstu
 	private JTextArea txtrWprowadTekst; //Wprowadzanie tekstu
@@ -26,7 +27,7 @@ public class View extends JFrame implements ActionListener{
 
 		setTitle("ColorPicker");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 350);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -45,7 +46,7 @@ public class View extends JFrame implements ActionListener{
 		for (int i=0; i<64;i++){
 
 			JButton button = new JButton();
-			button.setBackground(new Color(rand(0,255),rand(0,255),rand(0,255)));
+			button.setBackground(new Color(Logic.rand(0,255),Logic.rand(0,255),Logic.rand(0,255)));
 			button.addActionListener(new MyColorListener());
 			tablicaBtn[i] = button;
 			panelTable.add(button);
@@ -97,6 +98,9 @@ public class View extends JFrame implements ActionListener{
 		
 		btnHideShow = new JButton("Ukryj paletę kolorów");
 		panel_3.add(btnHideShow);
+
+		btnChangePalet = new JButton("Zmień paletę kolorów");
+		panel_3.add(btnChangePalet);
 		
 		btnDecreaseFontSize = new JButton("Zmniejsz rozmiar tekstu");
 		panel_3.add(btnDecreaseFontSize);
@@ -106,17 +110,13 @@ public class View extends JFrame implements ActionListener{
 
 		//Dodawanie nasłuchwiaczy, które nie były dodane w WindowBuilder
 		addListener(btnHideShow);
+		addListener(btnChangePalet);
 		addListener(btnDecreaseFontSize);
 		addListener(btnIncreaseFontSize);
 		addListener(btnCommit);
 
 	}
 
-
-	private int rand(int min, int max){
-
-		return (int) ((Math.random()*(max-min))+min);
-	}
 
 	private void addListener(JButton button){
 
@@ -130,6 +130,10 @@ public class View extends JFrame implements ActionListener{
 		if(e.getSource()== btnHideShow){
 
 			Logic.hideColors(panelTable,btnHideShow);
+
+		}else if(e.getSource()==btnChangePalet){
+
+			Logic.changeColorButtons(tablicaBtn);
 
 		}else if(e.getSource()==btnDecreaseFontSize){
 

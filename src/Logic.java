@@ -5,6 +5,11 @@ public class Logic {
 
     public static Color color = Color.BLACK;
 
+    static int rand(int min, int max){
+
+        return (int) ((Math.random()*(max-min))+min);
+    }
+
     public static void hideColors(JPanel panel,JButton jButton){
 
         if(panel.isVisible()){
@@ -56,6 +61,16 @@ public class Logic {
     public static void changeFontColor(JTextArea textArea){
 
         textArea.setForeground(color);
+
+    }
+
+    public static void changeColorButtons(JButton[] arrayBtn){
+
+        for(int i=0;i<arrayBtn.length;i++){
+
+            arrayBtn[i].setBackground(new Color(rand(0,255),rand(0,255),rand(0,255)));
+
+        }
 
     }
 
